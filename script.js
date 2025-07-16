@@ -1,14 +1,19 @@
 
 async function getChefBirthday(id) {
-    const response = await fetch(`https://dummyjson.com/recipes/${id}`);
-    const obj = await response.json();
-    const response2 = await fetch(`https://dummyjson.com/users/${obj.userId}`)
-    const birthday = await response2.json();
-    return birthday
+    try {
+        const response = await fetch(`https://dummyjson.com/recipes/${id}`);
+        const obj = await response.json();
+        const response2 = await fetch(`https://dummyjson.com/users/${obj.userId}`)
+        const birthday = await response2.json();
+        return birthday
+    } catch (error) {
+        console.error(error)
+    }
+
+
 }
 
-
-
+// esempi di utilizzo
 (async () => {
     try {
         const birthday = await getChefBirthday(20);
@@ -17,6 +22,3 @@ async function getChefBirthday(id) {
         console.error(error);
     }
 })();
-
-// .then(birthday => console.log("Data di nascita dello chef:", birthday.birthDate))
-// .catch(error => console.error("Errore:", error.message));
